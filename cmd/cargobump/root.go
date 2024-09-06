@@ -31,7 +31,7 @@ func New() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "cargobump <file-to-bump>",
 		Short: "cargobump cli",
-		Args:  cobra.ExactArgs(1),
+		Args:  cobra.NoArgs,
 		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 			out, err := log.Writer(logPolicy)
 			if err != nil {
@@ -106,7 +106,7 @@ func New() *cobra.Command {
 	cmd.DisableAutoGenTag = true
 
 	flagSet := cmd.Flags()
-	flagSet.StringVar(&rootFlags.cargoRoot, "cargoroot", "Cargo.lock", "path to the Cargo.lock root")
+	flagSet.StringVar(&rootFlags.cargoRoot, "cargoroot", "", "path to the Cargo.lock root")
 	flagSet.StringVar(&rootFlags.packages, "packages", "", "A space-separated list of dependencies to update in form package@version")
 	flagSet.StringVar(&rootFlags.bumpFile, "bump-file", "", "The input file to read dependencies to bump from")
 	return cmd
